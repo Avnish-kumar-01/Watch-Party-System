@@ -23,7 +23,9 @@ export async function initSocketServer(httpServer: HttpServer<typeof IncomingMes
 
   const io = new Server<ClientToServerEvents, ServerToClientEvents, Record<string, never>, SocketData>(httpServer, {
     cors: {
-      origin: process.env.NEXT_PUBLIC_APP_URL || '*',
+      origin: process.env.NEXT_PUBLIC_APP_URL
+        ? [process.env.NEXT_PUBLIC_APP_URL]
+        : true,
       methods: ['GET', 'POST'],
       credentials: true,
     },

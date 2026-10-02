@@ -1,4 +1,4 @@
-﻿# Production Dockerfile
+# Production Dockerfile
 
 FROM node:20-alpine AS builder
 
@@ -8,6 +8,12 @@ COPY package*.json ./
 RUN npm ci
 
 COPY . .
+
+# Build arguments for Next.js client-side bundles
+ARG NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+ARG NEXT_PUBLIC_APP_URL
+ENV NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=$NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+ENV NEXT_PUBLIC_APP_URL=$NEXT_PUBLIC_APP_URL
 
 RUN npm run build
 
