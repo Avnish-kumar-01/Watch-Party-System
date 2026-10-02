@@ -16,7 +16,9 @@ app.prepare().then(async () => {
 
   await initSocketServer(httpServer);
 
-  httpServer.listen(port, () => {
-    console.log(`> Ready on http://localhost:${port} [${dev ? 'dev' : 'production'}]`);
+  httpServer.listen(port, '0.0.0.0', () => {
+    console.log(
+      `> Ready on http://0.0.0.0:${port} [${dev ? 'dev' : 'production'}]`
+    );
   });
 });
